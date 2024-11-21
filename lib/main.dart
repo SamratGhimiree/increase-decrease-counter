@@ -5,7 +5,7 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp( 
+    return MaterialApp(
       home: CounterScreen(),
     );
   }
@@ -62,7 +62,18 @@ class _CounterScreenState extends State<CounterScreen> {
         onPressed: _decrementCounter,
         child: Icon(Icons.exposure_minus_1),
       ),
-      ],
+          SizedBox(width: 70),
+
+          FloatingActionButton(
+            onPressed: () {
+              setState(() {
+                _counter = 0;
+              });
+            },
+            child: Icon(Icons.refresh),
+            tooltip: 'Reset',
+          )
+        ],
       ),
     );
   }
