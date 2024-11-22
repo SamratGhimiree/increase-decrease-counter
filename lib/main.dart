@@ -1,7 +1,9 @@
 import 'dart:async'; // Import Timer package
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 void main() => runApp(MyApp());
+
 
 class MyApp extends StatelessWidget {
   @override
@@ -12,6 +14,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
 class CounterScreen extends StatefulWidget {
   @override
   _CounterScreenState createState() => _CounterScreenState();
@@ -21,6 +24,7 @@ class _CounterScreenState extends State<CounterScreen> {
   int _counter = 0;
   List<int> _history = [];
   Timer? _inactivityTimer;
+
 
   void _startInactivityTimer() {
     // Cancel the previous timer if it's running
@@ -39,6 +43,13 @@ class _CounterScreenState extends State<CounterScreen> {
       _counter++;
     });
     _startInactivityTimer(); // Restart inactivity timer
+    if (_counter == 10) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('You reached count 10!')),
+      );
+    }
+    final player = AudioPlayer();
+    player.play('assets/click.mp3');
   }
 
   void _decrementCounter() {
@@ -48,6 +59,8 @@ class _CounterScreenState extends State<CounterScreen> {
       }
     });
     _startInactivityTimer(); // Restart inactivity timer
+    final player = AudioPlayer();
+    player.play('assets/click.mp3');
   }
 
   @override
